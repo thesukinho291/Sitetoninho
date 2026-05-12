@@ -6,7 +6,7 @@ import { Button } from '../components/Button';
 import { Section } from '../components/Section';
 import { useData } from '../contexts/DataContext';
 import { buildCalendarDays, getAvailableTimes, isDateBookable } from '../lib/dataService';
-import { todayDate, toDateKey } from '../lib/date';
+import { isPastTimeForToday, todayDate, toDateKey } from '../lib/date';
 
 type Step = 'data' | 'horario' | 'dados' | 'confirmacao';
 
@@ -17,6 +17,7 @@ export function AppointmentPage() {
   const [selectedTime, setSelectedTime] = useState('');
   const [step, setStep] = useState<Step>('data');
   const [done, setDone] = useState(false);
+  const [error, setError] = useState('');
   const [form, setForm] = useState({ full_name: '', phone: '', neighborhood: '', subject: '', description: '', consent: false });
   const days = useMemo(() => buildCalendarDays(month), [month]);
   const times = selectedDate ? getAvailableTimes(selectedDate, appointments) : [];
@@ -25,18 +26,27 @@ export function AppointmentPage() {
   async function submit(event: FormEvent) {
     event.preventDefault();
     if (!selectedDate || !selectedTime || !form.consent) return;
-    await createAppointment({
-      full_name: form.full_name,
-      phone: form.phone,
-      neighborhood: form.neighborhood,
-      subject: form.subject,
-      description: form.description,
-      appointment_date: selectedDate,
-      appointment_time: selectedTime,
-      consent: form.consent,
-    });
-    setDone(true);
-    setStep('confirmacao');
+    setError('');
+    if (!getAvailableTimes(selectedDate, appointments).includes(selectedTime as any)) {
+      setError('Horário indisponível para agendamento.');
+      return;
+    }
+    try {
+      await createAppointment({
+        full_name: form.full_name,
+        phone: form.phone,
+        neighborhood: form.neighborhood,
+        subject: form.subject,
+        description: form.description,
+        appointment_date: selectedDate,
+        appointment_time: selectedTime,
+        consent: form.consent,
+      });
+      setDone(true);
+      setStep('confirmacao');
+    } catch {
+      setError('Horário indisponível para agendamento.');
+    }
   }
 
   if (done) {
@@ -84,6 +94,7 @@ export function AppointmentPage() {
                   onClick={() => {
                     setSelectedDate(key);
                     setSelectedTime('');
+                    setError('');
                     setStep('horario');
                   }}
                   className={`aspect-square rounded-lg text-sm font-black transition ${selected ? 'bg-civic-blue text-white' : bookable ? 'bg-white text-civic-ink hover:bg-civic-yellow' : 'bg-transparent text-slate-300 opacity-45'}`}
@@ -102,9 +113,10 @@ export function AppointmentPage() {
             <div className="mt-4 grid gap-3">
               {['10:30', '13:30', '15:30'].map((time) => {
                 const available = times.includes(time as any);
+                const pastTime = selectedDate ? isPastTimeForToday(selectedDate, time) : false;
                 return (
-                  <button key={time} disabled={!selectedDate || !available} onClick={() => { setSelectedTime(time); setStep('dados'); }} className={`rounded-lg border px-4 py-4 text-left font-black ${selectedTime === time ? 'border-civic-blue bg-civic-blue text-white' : available ? 'border-slate-200 bg-slate-50 text-civic-ink hover:border-civic-yellow' : 'border-slate-100 bg-slate-100 text-slate-400'}`}>
-                    {time} {available ? '' : 'indisponível'}
+                  <button key={time} disabled={!selectedDate || !available} onClick={() => { setSelectedTime(time); setError(''); setStep('dados'); }} className={`rounded-lg border px-4 py-4 text-left font-black ${selectedTime === time ? 'border-civic-blue bg-civic-blue text-white' : available ? 'border-slate-200 bg-slate-50 text-civic-ink hover:border-civic-yellow' : 'border-slate-100 bg-slate-100 text-slate-400'}`}>
+                    {time} {available ? '' : pastTime ? 'Horário já passou' : 'Indisponível'}
                   </button>
                 );
               })}
@@ -126,6 +138,7 @@ export function AppointmentPage() {
               autorizo o uso dos meus dados para contato da equipe do gabinete sobre este agendamento.
             </label>
             <p className="text-xs leading-5 text-slate-500">Os dados informados serão usados apenas para tratar esta solicitação de atendimento, conforme a LGPD.</p>
+            {error ? <p className="text-sm font-bold text-red-600">{error}</p> : null}
             <Button type="submit" disabled={!selectedDate || !selectedTime}>Confirmar solicitação</Button>
           </form>
         </div>

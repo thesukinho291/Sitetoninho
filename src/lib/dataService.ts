@@ -1,5 +1,6 @@
 import { addDays, format, parseISO, startOfMonth } from 'date-fns';
 import { APPOINTMENT_TIMES } from './constants';
+import { isPastDate, isPastTimeForToday } from './date';
 import { defaultSettings, mockActions, mockAppointments, mockNewspapers } from './mockData';
 import { isSupabaseConfigured, supabase } from './supabase';
 import { readStore, writeStore } from './storage';
@@ -67,6 +68,13 @@ export async function getAppointments(): Promise<Appointment[]> {
 }
 
 export async function createAppointment(input: Omit<Appointment, 'id' | 'created_at' | 'status'>) {
+  const current = await getAppointments();
+  const availableTimes = getAvailableTimes(input.appointment_date, current);
+
+  if (!availableTimes.includes(input.appointment_time as any)) {
+    throw new Error('Horário indisponível para agendamento.');
+  }
+
   const appointment: Appointment = {
     ...input,
     id: newId(),
@@ -80,7 +88,6 @@ export async function createAppointment(input: Omit<Appointment, 'id' | 'created
     return appointment;
   }
 
-  const current = await getAppointments();
   writeStore(keys.appointments, [...current, appointment]);
   return appointment;
 }
@@ -177,18 +184,18 @@ export async function deleteSocialAction(id: string) {
 }
 
 export function getAvailableTimes(dateKey: string, appointments: Appointment[]) {
+  if (isPastDate(dateKey)) return [];
+
   const busy = new Set(
     appointments
       .filter((item) => item.appointment_date === dateKey && item.status !== 'cancelado')
       .map((item) => item.appointment_time),
   );
-  return APPOINTMENT_TIMES.filter((time) => !busy.has(time));
+  return APPOINTMENT_TIMES.filter((time) => !busy.has(time) && !isPastTimeForToday(dateKey, time));
 }
 
 export function isDateBookable(date: Date, appointments: Appointment[]) {
-  const today = new Date();
-  const monthStart = startOfMonth(today);
-  if (date < monthStart || format(date, 'yyyy-MM-dd') < format(today, 'yyyy-MM-dd')) return false;
+  if (isPastDate(date)) return false;
   return getAvailableTimes(format(date, 'yyyy-MM-dd'), appointments).length > 0;
 }
 
