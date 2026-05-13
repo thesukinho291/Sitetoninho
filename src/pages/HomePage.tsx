@@ -46,10 +46,10 @@ const highlights = [
 ];
 
 export function HomePage() {
-  const { settings, newspapers, actions } = useData();
+  const { newspapers, actions } = useData();
   const publishedNewspapers = newspapers.filter((item) => item.status === 'publicado').slice(0, 2);
   const publishedActions = actions.filter((item) => item.status === 'publicado').slice(0, 3);
-  const heroImage = !settings.home_image_url || settings.home_image_url === imageBank.corrida ? imageBank.heroComunidade : settings.home_image_url;
+  const heroImage = imageBank.heroComunidade;
 
   return (
     <>
@@ -58,10 +58,10 @@ export function HomePage() {
           src={heroImage}
           alt="Ação social e esportiva do mandato"
           className="absolute inset-0 -z-10 h-full w-full"
-          imgClassName="opacity-70"
+          imgClassName="opacity-100 object-center"
           fallbackLabel="Esporte e cidadania"
         />
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_76%_24%,rgba(245,197,66,0.24),transparent_28%),linear-gradient(110deg,rgba(23,32,51,0.96)_0%,rgba(15,111,183,0.82)_48%,rgba(23,32,51,0.38)_100%)]" />
+        <div className="absolute inset-0 -z-10 bg-[linear-gradient(90deg,rgba(23,32,51,0.94)_0%,rgba(15,111,183,0.76)_38%,rgba(23,32,51,0.18)_100%)]" />
         <div className="relative mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.03fr_0.97fr] lg:px-8">
           <div className="animate-hero max-w-3xl">
             <Badge>Mandato, esporte e cidadania</Badge>
