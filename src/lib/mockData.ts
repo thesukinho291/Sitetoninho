@@ -3,6 +3,7 @@ import { SUCCESS_MESSAGE } from './constants';
 
 export const imageBank = {
   toninhoTribuna: '/images/toninho/toninho-microfone.jpg',
+  heroComunidade: '/images/acoes/hero-comunidade.png',
   corrida: '/images/acoes/atleta-cidadao.jpg',
   instituto: '/images/acoes/atleta-cidadao.jpg',
   acao: '/images/acoes/acao-social.jpg',
@@ -17,7 +18,7 @@ export const defaultSettings: SiteSettings = {
   office_location: '',
   home_title: 'Toninho Corredor',
   home_subtitle: 'Esporte, cidadania e compromisso com Sorocaba',
-  home_image_url: imageBank.corrida,
+  home_image_url: imageBank.heroComunidade,
   appointment_success_message: SUCCESS_MESSAGE,
 };
 

@@ -49,12 +49,13 @@ export function HomePage() {
   const { settings, newspapers, actions } = useData();
   const publishedNewspapers = newspapers.filter((item) => item.status === 'publicado').slice(0, 2);
   const publishedActions = actions.filter((item) => item.status === 'publicado').slice(0, 3);
+  const heroImage = !settings.home_image_url || settings.home_image_url === imageBank.corrida ? imageBank.heroComunidade : settings.home_image_url;
 
   return (
     <>
       <section className="relative isolate overflow-hidden bg-civic-ink text-white">
         <SafeImage
-          src={settings.home_image_url || imageBank.corrida}
+          src={heroImage}
           alt="Ação social e esportiva do mandato"
           className="absolute inset-0 -z-10 h-full w-full"
           imgClassName="opacity-70"
