@@ -2,7 +2,7 @@ import { Appointment, NewspaperEdition, SiteSettings, SocialAction } from '../ty
 import { SUCCESS_MESSAGE } from './constants';
 
 export const imageBank = {
-  toninhoTribuna: '/images/toninho/toninho-corredor.jpg',
+  toninhoTribuna: '/images/toninho/toninho-microfone.jpg',
   corrida: '/images/acoes/atleta-cidadao.jpg',
   instituto: '/images/acoes/atleta-cidadao.jpg',
   acao: '/images/acoes/acao-social.jpg',
