@@ -49,17 +49,14 @@ export function HomePage() {
   const { newspapers, actions } = useData();
   const publishedNewspapers = newspapers.filter((item) => item.status === 'publicado').slice(0, 2);
   const publishedActions = actions.filter((item) => item.status === 'publicado').slice(0, 3);
-  const heroImage = imageBank.heroComunidade;
 
   return (
     <>
       <section className="relative isolate overflow-hidden bg-slate-900 text-white">
-        <SafeImage
-          src={heroImage}
-          alt="Ação social e esportiva do mandato"
-          className="absolute inset-0 z-0 h-full w-full"
-          imgClassName="opacity-100 object-top"
-          fallbackLabel="Esporte e cidadania"
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat"
+          style={{ backgroundImage: `url(${imageBank.heroComunidade})` }}
         />
         <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(6,12,24,0.88)_0%,rgba(6,12,24,0.58)_42%,rgba(6,12,24,0.08)_72%,rgba(6,12,24,0)_100%)]" />
         <div className="relative z-[2] mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.03fr_0.97fr] lg:px-8">
