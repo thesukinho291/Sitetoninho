@@ -53,7 +53,7 @@ export function HomePage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-civic-ink text-white">
+      <section className="relative isolate overflow-hidden bg-slate-900 text-white">
         <SafeImage
           src={heroImage}
           alt="Ação social e esportiva do mandato"
@@ -61,7 +61,7 @@ export function HomePage() {
           imgClassName="opacity-100 object-top"
           fallbackLabel="Esporte e cidadania"
         />
-        <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(23,32,51,0.94)_0%,rgba(15,111,183,0.72)_38%,rgba(23,32,51,0.08)_100%)]" />
+        <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(6,12,24,0.88)_0%,rgba(6,12,24,0.58)_42%,rgba(6,12,24,0.08)_72%,rgba(6,12,24,0)_100%)]" />
         <div className="relative z-[2] mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.03fr_0.97fr] lg:px-8">
           <div className="animate-hero max-w-3xl">
             <Badge>Mandato, esporte e cidadania</Badge>
