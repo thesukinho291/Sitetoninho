@@ -1,4 +1,4 @@
-import { Menu, X } from 'lucide-react';
+import { Instagram, Menu, X } from 'lucide-react';
 import { useState } from 'react';
 import { Link, NavLink, Outlet } from 'react-router-dom';
 import { SafeImage } from '../components/SafeImage';
@@ -19,19 +19,19 @@ export function PublicLayout() {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/92 shadow-sm backdrop-blur-xl">
+      <header className="sticky top-0 z-50 border-b border-slate-200/80 bg-white/95 shadow-sm backdrop-blur-xl">
         <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-          <Link to="/" className="flex items-center gap-3">
+          <Link to="/" className="flex min-w-0 items-center gap-3" onClick={() => setOpen(false)}>
             <SafeImage
               src={imageBank.toninhoTribuna}
               alt="Toninho Corredor"
-              className="h-12 w-12 rounded-full border-2 border-civic-blue shadow-sm"
+              className="h-12 w-12 shrink-0 rounded-full border-2 border-civic-blue shadow-sm"
               imgClassName="object-top"
-              fallbackLabel="Toninho"
+              fallbackLabel="TC"
             />
-            <span>
-              <strong className="block text-lg leading-tight text-civic-ink">Toninho Corredor</strong>
-              <span className="block text-xs font-semibold uppercase tracking-wide text-slate-500">Atendimento e cidadania</span>
+            <span className="min-w-0">
+              <strong className="block truncate text-lg leading-tight text-civic-ink">Toninho Corredor</strong>
+              <span className="block truncate text-xs font-semibold uppercase tracking-wide text-slate-500">Atendimento e cidadania</span>
             </span>
           </Link>
           <nav className="hidden items-center gap-1 lg:flex">
@@ -41,21 +41,24 @@ export function PublicLayout() {
               </NavLink>
             ))}
           </nav>
-          <a className="hidden rounded-lg bg-civic-yellow px-5 py-3 text-sm font-black text-civic-ink transition hover:bg-amber-300 lg:inline-flex" href={settings.instagram_url} target="_blank" rel="noreferrer">
-            Instagram
+          <a className="hidden items-center gap-2 rounded-lg bg-civic-yellow px-5 py-3 text-sm font-black text-civic-ink transition hover:bg-amber-300 lg:inline-flex" href={settings.instagram_url} target="_blank" rel="noreferrer">
+            <Instagram size={17} /> Instagram
           </a>
-          <button className="grid h-11 w-11 place-items-center rounded-lg bg-slate-100 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label="Abrir menu">
+          <button className="grid h-11 w-11 shrink-0 place-items-center rounded-lg bg-slate-100 text-civic-ink transition hover:bg-slate-200 lg:hidden" onClick={() => setOpen((value) => !value)} aria-label={open ? 'Fechar menu' : 'Abrir menu'}>
             {open ? <X size={22} /> : <Menu size={22} />}
           </button>
         </div>
         {open && (
-          <div className="border-t border-slate-200 bg-white px-4 py-4 lg:hidden">
-            <div className="flex flex-col gap-2">
+          <div className="border-t border-slate-200 bg-white px-4 py-4 shadow-lg lg:hidden">
+            <div className="mx-auto flex max-w-7xl flex-col gap-2">
               {links.map(([label, href]) => (
-                <NavLink key={href} to={href} onClick={() => setOpen(false)} className="rounded-lg px-4 py-3 font-bold text-slate-800 hover:bg-slate-100">
+                <NavLink key={href} to={href} onClick={() => setOpen(false)} className={({ isActive }) => `rounded-lg px-4 py-3 font-bold ${isActive ? 'bg-civic-blue text-white' : 'text-slate-800 hover:bg-slate-100'}`}>
                   {label}
                 </NavLink>
               ))}
+              <a className="mt-2 inline-flex min-h-11 items-center justify-center gap-2 rounded-lg bg-civic-yellow px-4 py-3 text-sm font-black text-civic-ink" href={settings.instagram_url} target="_blank" rel="noreferrer">
+                <Instagram size={17} /> Instagram oficial
+              </a>
             </div>
           </div>
         )}
@@ -68,21 +71,23 @@ export function PublicLayout() {
           <div>
             <h2 className="text-2xl font-black">Toninho Corredor</h2>
             <p className="mt-3 max-w-md text-sm leading-6 text-slate-300">Mandato próximo da população, com esporte, cidadania, atendimento ao morador e ações sociais nos bairros.</p>
+            <p className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-civic-yellow">Sorocaba • atendimento • cidadania</p>
           </div>
           <div>
             <h3 className="font-bold">Links rápidos</h3>
             <div className="mt-3 grid gap-2 text-sm text-slate-300">
-              <Link to="/jornal">Jornal Atleta Cidadão</Link>
-              <Link to="/agendamento">Agendamento</Link>
-              <Link to="/acoes">Ações sociais</Link>
+              <Link className="hover:text-white" to="/jornal">Jornal Atleta Cidadão</Link>
+              <Link className="hover:text-white" to="/agendamento">Agendamento</Link>
+              <Link className="hover:text-white" to="/acoes">Ações sociais</Link>
             </div>
           </div>
           <div>
             <h3 className="font-bold">Canais</h3>
             <div className="mt-3 grid gap-2 text-sm text-slate-300">
-              <a href={settings.instagram_url} target="_blank" rel="noreferrer">Instagram oficial</a>
+              <a className="hover:text-white" href={settings.instagram_url} target="_blank" rel="noreferrer">Instagram oficial</a>
               {settings.email && <span>{settings.email}</span>}
               {settings.phone && <span>{settings.phone}</span>}
+              {settings.office_location && <span>{settings.office_location}</span>}
             </div>
           </div>
         </div>

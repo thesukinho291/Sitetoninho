@@ -1,4 +1,4 @@
-import { Download, Eye } from 'lucide-react';
+import { Download, Eye, Newspaper } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../components/Badge';
 import { ButtonLink } from '../components/Button';
@@ -14,7 +14,12 @@ export function NewspaperPage() {
   return (
     <Section className="bg-white" eyebrow="Jornal Atleta Cidadão" title="Edições publicadas" subtitle="Notícias, registros e matérias sobre esporte, cidadania, ações sociais, bairros e juventude.">
       {items.length === 0 ? (
-        <EmptyState title="Nenhuma edição publicada" text="As próximas edições aparecerão aqui assim que forem cadastradas pela equipe." />
+        <div className="grid gap-6 rounded-lg border border-civic-blue/15 bg-slate-50 p-6 md:grid-cols-[auto_1fr] md:items-center">
+          <span className="grid h-16 w-16 place-items-center rounded-lg bg-civic-blue text-white">
+            <Newspaper size={30} />
+          </span>
+          <EmptyState title="Nenhuma edição publicada" text="As próximas edições aparecerão aqui assim que forem cadastradas pela equipe. A página já está preparada para receber capas, categorias, datas e PDFs do Jornal Atleta Cidadão." />
+        </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((edition) => (

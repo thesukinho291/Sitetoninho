@@ -1,4 +1,16 @@
-import { ArrowRight, CalendarCheck, FileText, HandHeart, HeartPulse, MapPinned, Newspaper, ShieldCheck, Trophy, Users } from 'lucide-react';
+import {
+  ArrowRight,
+  CalendarCheck,
+  CheckCircle2,
+  FileText,
+  HandHeart,
+  HeartPulse,
+  MapPinned,
+  Newspaper,
+  ShieldCheck,
+  Trophy,
+  Users,
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../components/Badge';
 import { ButtonLink } from '../components/Button';
@@ -52,33 +64,50 @@ export function HomePage() {
 
   return (
     <>
-      <section className="relative isolate overflow-hidden bg-slate-900 text-white">
+      <section className="relative isolate overflow-hidden bg-slate-950 text-white">
         <div
           aria-hidden="true"
-          className="absolute inset-0 z-0 bg-cover bg-top bg-no-repeat"
+          className="absolute inset-0 z-0 bg-cover bg-center bg-no-repeat opacity-80"
           style={{ backgroundImage: `url(${imageBank.heroComunidade})` }}
         />
-        <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(6,12,24,0.88)_0%,rgba(6,12,24,0.58)_42%,rgba(6,12,24,0.08)_72%,rgba(6,12,24,0)_100%)]" />
-        <div className="relative z-[2] mx-auto grid min-h-[calc(100vh-80px)] max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-[1.03fr_0.97fr] lg:px-8">
-          <div className="animate-hero max-w-3xl">
+        <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(5,12,27,0.96)_0%,rgba(5,12,27,0.86)_46%,rgba(5,12,27,0.36)_78%,rgba(5,12,27,0.18)_100%)]" />
+        <div className="absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-slate-950 to-transparent" />
+        <div className="relative z-[2] mx-auto grid min-h-[680px] max-w-7xl items-center gap-10 px-4 py-12 sm:min-h-[720px] sm:px-6 lg:min-h-[calc(100vh-80px)] lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+          <div className="animate-hero min-w-0 max-w-3xl overflow-hidden">
             <Badge>Mandato, esporte e cidadania</Badge>
-            <h1 className="mt-6 text-5xl font-black leading-tight sm:text-6xl lg:text-7xl">Toninho Corredor</h1>
-            <p className="mt-6 max-w-2xl text-xl font-semibold leading-8 text-slate-50 sm:text-2xl">
+            <h1 className="mt-6 max-w-full text-4xl font-black leading-[1.02] sm:text-6xl lg:text-7xl">Toninho Corredor</h1>
+            <p className="mt-6 max-w-[22rem] text-lg font-semibold leading-7 text-slate-50 sm:max-w-2xl sm:text-2xl sm:leading-8">
               Esporte, cidadania e compromisso com Sorocaba
             </p>
-            <p className="mt-4 max-w-2xl text-base leading-7 text-blue-50 sm:text-lg">
+            <p className="mt-4 max-w-[22rem] text-base leading-7 text-blue-50 sm:max-w-2xl sm:text-lg">
               Um canal direto para atendimento, Jornal Atleta Cidadão e registros das ações sociais e esportivas do mandato.
             </p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-              <ButtonLink to="/agendamento" variant="secondary">
+            <div className="mt-8 flex w-full flex-col gap-3 sm:w-auto sm:flex-row sm:flex-wrap">
+              <ButtonLink to="/agendamento" variant="secondary" className="w-full sm:w-auto">
                 Agendar atendimento <ArrowRight size={18} />
               </ButtonLink>
-              <ButtonLink to="/jornal" variant="ghost">Ver Jornal Atleta Cidadão</ButtonLink>
-              <ButtonLink to="/acoes" variant="ghost">Conhecer ações</ButtonLink>
+              <ButtonLink to="/jornal" variant="ghost" className="w-full sm:w-auto">Ver Jornal Atleta Cidadão</ButtonLink>
+              <ButtonLink to="/acoes" variant="ghost" className="w-full sm:w-auto">Conhecer ações</ButtonLink>
+            </div>
+            <div className="mt-8 grid gap-3 text-sm font-bold text-slate-100 sm:grid-cols-3">
+              {['Atendimento organizado', 'Presença nos bairros', 'Esporte como inclusão'].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2 rounded-lg border border-white/15 bg-white/8 px-3 py-2 backdrop-blur">
+                  <CheckCircle2 size={16} className="shrink-0 text-civic-yellow" />
+                  {item}
+                </span>
+              ))}
             </div>
           </div>
-          <div className="animate-rise hidden self-end lg:block">
-            <div className="rounded-lg border border-white/25 bg-white/94 p-5 text-civic-ink shadow-soft backdrop-blur">
+          <div className="animate-rise hidden lg:block">
+            <div className="ml-auto max-w-md overflow-hidden rounded-lg border border-white/20 bg-white/95 text-civic-ink shadow-soft backdrop-blur">
+              <SafeImage src={imageBank.toninhoTribuna} alt="Toninho Corredor em atividade pública" className="h-[420px] w-full" imgClassName="object-top" fallbackLabel="Toninho Corredor" />
+              <div className="p-5">
+                <p className="text-xs font-black uppercase tracking-[0.18em] text-civic-blue">Gabinete em movimento</p>
+                <h2 className="mt-2 text-2xl font-black leading-tight">Atendimento próximo e trabalho nos bairros</h2>
+                <p className="mt-3 text-sm leading-6 text-slate-600">Uma apresentação clara do mandato para quem busca informação, agenda e canais oficiais.</p>
+              </div>
+            </div>
+            <div className="mt-4 rounded-lg border border-white/20 bg-white/92 p-4 text-civic-ink shadow-soft backdrop-blur">
               <div className="grid grid-cols-3 gap-3">
                 <Metric value="3" label="horários por dia" />
                 <Metric value="7" label="temas do jornal" />
@@ -152,42 +181,56 @@ export function HomePage() {
       </Section>
 
       <Section className="bg-white" eyebrow="Jornal Atleta Cidadão" title="Informação sobre ações e comunidade">
-        <div className="grid gap-6 md:grid-cols-2">
-          {publishedNewspapers.map((edition) => (
-            <Link to={`/jornal/${edition.id}`} key={edition.id} className="card-hover grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm sm:grid-cols-[220px_1fr]">
-              <SafeImage src={edition.cover_url} alt={`Capa ${edition.title}`} className="h-56 w-full sm:h-full" fallbackLabel="Jornal" />
-              <div className="p-6">
-                <Badge>{edition.categories[0] ?? 'Jornal'}</Badge>
-                <h3 className="mt-4 text-xl font-black text-civic-ink">{edition.title}</h3>
-                <p className="mt-3 text-sm leading-6 text-slate-600">{edition.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+        {publishedNewspapers.length ? (
+          <div className="grid gap-6 md:grid-cols-2">
+            {publishedNewspapers.map((edition) => (
+              <Link to={`/jornal/${edition.id}`} key={edition.id} className="card-hover grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm sm:grid-cols-[220px_1fr]">
+                <SafeImage src={edition.cover_url} alt={`Capa ${edition.title}`} className="h-56 w-full sm:h-full" fallbackLabel="Jornal" />
+                <div className="p-6">
+                  <Badge>{edition.categories[0] ?? 'Jornal'}</Badge>
+                  <h3 className="mt-4 text-xl font-black text-civic-ink">{edition.title}</h3>
+                  <p className="mt-3 text-sm leading-6 text-slate-600">{edition.description}</p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-lg border border-civic-blue/20 bg-slate-50 p-6 text-slate-700">
+            <p className="font-black text-civic-ink">As edições publicadas aparecerão aqui.</p>
+            <p className="mt-2 text-sm leading-6">Enquanto isso, o site mantém o canal de atendimento e as páginas institucionais disponíveis para a população.</p>
+          </div>
+        )}
       </Section>
 
       <Section className="bg-slate-100" eyebrow="Nos bairros" title="Ações sociais, esporte e presença" subtitle="Registros de eventos, atendimentos e iniciativas que aproximam o mandato da vida real das comunidades.">
-        <div className="grid gap-5 md:grid-cols-3">
-          {publishedActions.map((action) => (
-            <Link to={`/acoes/${action.id}`} key={action.id} className="card-hover overflow-hidden rounded-lg bg-white text-slate-900 shadow-sm">
-              <SafeImage src={action.image_urls[0]} alt={action.title} className="h-56 w-full" fallbackLabel={action.category} />
-              <div className="p-5">
-                <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-civic-blue">
-                  <MapPinned size={14} /> {action.location}
+        {publishedActions.length ? (
+          <div className="grid gap-5 md:grid-cols-3">
+            {publishedActions.map((action) => (
+              <Link to={`/acoes/${action.id}`} key={action.id} className="card-hover overflow-hidden rounded-lg bg-white text-slate-900 shadow-sm">
+                <SafeImage src={action.image_urls[0]} alt={action.title} className="h-56 w-full" fallbackLabel={action.category} />
+                <div className="p-5">
+                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wide text-civic-blue">
+                    <MapPinned size={14} /> {action.location}
+                  </div>
+                  <h3 className="mt-3 text-lg font-black text-civic-ink">{action.title}</h3>
+                  <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">{action.description}</p>
                 </div>
-                <h3 className="mt-3 text-lg font-black text-civic-ink">{action.title}</h3>
-                <p className="mt-2 line-clamp-3 text-sm leading-6 text-slate-600">{action.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="rounded-lg bg-white p-6 shadow-sm">
+            <p className="font-black text-civic-ink">Os registros de ações serão publicados em breve.</p>
+            <p className="mt-2 text-sm leading-6 text-slate-600">A estrutura já está preparada para exibir fotos, locais, datas e detalhes das iniciativas do mandato.</p>
+          </div>
+        )}
       </Section>
 
       <Section className="bg-white">
-        <div className="grid gap-6 rounded-lg bg-[linear-gradient(135deg,#0f6fb7,#172033)] p-8 text-white shadow-soft md:grid-cols-[1fr_auto] md:items-center">
+        <div className="grid gap-6 rounded-lg bg-[linear-gradient(135deg,#0f6fb7,#172033)] p-6 text-white shadow-soft sm:p-8 md:grid-cols-[1fr_auto] md:items-center">
           <div>
             <Trophy size={32} className="text-civic-yellow" />
-            <h2 className="mt-4 text-3xl font-black">Precisa falar com o gabinete?</h2>
+            <h2 className="mt-4 text-3xl font-black leading-tight">Precisa falar com o gabinete?</h2>
             <p className="mt-3 max-w-2xl text-blue-50">Escolha uma data disponível, informe o assunto e a equipe entrará em contato para confirmar o atendimento.</p>
           </div>
           <ButtonLink to="/agendamento" variant="secondary">Agendar atendimento</ButtonLink>

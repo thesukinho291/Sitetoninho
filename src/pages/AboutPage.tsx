@@ -1,5 +1,6 @@
-import { Section } from '../components/Section';
+import { CheckCircle2 } from 'lucide-react';
 import { SafeImage } from '../components/SafeImage';
+import { Section } from '../components/Section';
 import { imageBank } from '../lib/mockData';
 
 export function AboutPage() {
@@ -8,10 +9,20 @@ export function AboutPage() {
       <Section className="bg-white" eyebrow="Sobre" title="Toninho Corredor" subtitle="Uma trajetória ligada ao esporte, à formação de jovens e ao atendimento direto da população de Sorocaba.">
         <div className="grid gap-8 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <SafeImage src={imageBank.toninhoTribuna} alt="Toninho Corredor em atividade pública" className="h-[460px] w-full rounded-lg shadow-soft" imgClassName="object-top" fallbackLabel="Toninho Corredor" />
-          <div className="grid gap-5 text-lg leading-8 text-slate-700">
-            <p>Toninho Corredor é vereador de Sorocaba, atleta profissional e técnico de esportes. Sua história pública tem forte ligação com a corrida, com projetos sociais e com a formação cidadã de crianças e jovens.</p>
-            <p>O apelido nasceu da presença constante no esporte. Ao longo dos anos, essa vivência se aproximou do trabalho comunitário, especialmente em iniciativas que usam a atividade física como caminho para disciplina, convivência, saúde e oportunidade.</p>
-            <p>À frente de ações ligadas ao Atleta Cidadão, Toninho mantém uma atuação voltada aos bairros, ouvindo moradores, acompanhando demandas e fortalecendo projetos que aproximam poder público, comunidade e vida prática.</p>
+          <div>
+            <div className="grid gap-5 text-lg leading-8 text-slate-700">
+              <p>Toninho Corredor é vereador de Sorocaba, atleta profissional e técnico de esportes. Sua história pública tem forte ligação com a corrida, com projetos sociais e com a formação cidadã de crianças e jovens.</p>
+              <p>O apelido nasceu da presença constante no esporte. Ao longo dos anos, essa vivência se aproximou do trabalho comunitário, especialmente em iniciativas que usam a atividade física como caminho para disciplina, convivência, saúde e oportunidade.</p>
+              <p>À frente de ações ligadas ao Atleta Cidadão, Toninho mantém uma atuação voltada aos bairros, ouvindo moradores, acompanhando demandas e fortalecendo projetos que aproximam poder público, comunidade e vida prática.</p>
+            </div>
+            <div className="mt-7 grid gap-3 sm:grid-cols-2">
+              {['Escuta direta da população', 'Esporte como ferramenta social', 'Presença nas comunidades', 'Encaminhamento organizado'].map((item) => (
+                <span key={item} className="inline-flex items-center gap-2 rounded-lg bg-slate-50 px-4 py-3 text-sm font-bold text-civic-ink">
+                  <CheckCircle2 size={17} className="text-civic-blue" />
+                  {item}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
       </Section>

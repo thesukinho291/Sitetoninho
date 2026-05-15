@@ -1,4 +1,4 @@
-import { Share2 } from 'lucide-react';
+import { HandHeart, Share2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { Badge } from '../components/Badge';
 import { EmptyState } from '../components/EmptyState';
@@ -13,7 +13,12 @@ export function ActionsPage() {
   return (
     <Section className="bg-white" eyebrow="Ações sociais" title="Eventos, corridas e projetos" subtitle="Registros das iniciativas do mandato, do esporte e do trabalho social nos bairros.">
       {items.length === 0 ? (
-        <EmptyState title="Nenhuma ação publicada" text="As ações cadastradas e publicadas pela equipe aparecerão aqui." />
+        <div className="grid gap-6 rounded-lg border border-civic-blue/15 bg-slate-50 p-6 md:grid-cols-[auto_1fr] md:items-center">
+          <span className="grid h-16 w-16 place-items-center rounded-lg bg-civic-blue text-white">
+            <HandHeart size={30} />
+          </span>
+          <EmptyState title="Nenhuma ação publicada" text="As ações cadastradas e publicadas pela equipe aparecerão aqui. A estrutura já está pronta para mostrar fotos, datas, locais e detalhes dos projetos nos bairros." />
+        </div>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
           {items.map((action) => (
