@@ -72,7 +72,7 @@ export function HomePage() {
         />
         <div className="absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(5,12,27,0.96)_0%,rgba(5,12,27,0.86)_46%,rgba(5,12,27,0.36)_78%,rgba(5,12,27,0.18)_100%)]" />
         <div className="absolute inset-x-0 bottom-0 z-[1] h-32 bg-gradient-to-t from-slate-950 to-transparent" />
-        <div className="relative z-[2] mx-auto grid min-h-[680px] max-w-7xl items-center gap-10 px-4 py-12 sm:min-h-[720px] sm:px-6 lg:min-h-[calc(100vh-80px)] lg:grid-cols-[0.95fr_1.05fr] lg:px-8">
+        <div className="relative z-[2] mx-auto grid min-h-[680px] max-w-7xl items-center px-4 py-12 sm:min-h-[720px] sm:px-6 lg:min-h-[calc(100vh-80px)] lg:px-8">
           <div className="animate-hero min-w-0 max-w-3xl overflow-hidden">
             <Badge>Mandato, esporte e cidadania</Badge>
             <h1 className="mt-6 max-w-full text-4xl font-black leading-[1.02] sm:text-6xl lg:text-7xl">Toninho Corredor</h1>
@@ -96,23 +96,6 @@ export function HomePage() {
                   {item}
                 </span>
               ))}
-            </div>
-          </div>
-          <div className="animate-rise hidden lg:block">
-            <div className="ml-auto max-w-md overflow-hidden rounded-lg border border-white/20 bg-white/95 text-civic-ink shadow-soft backdrop-blur">
-              <SafeImage src={imageBank.toninhoTribuna} alt="Toninho Corredor em atividade pública" className="h-[420px] w-full" imgClassName="object-top" fallbackLabel="Toninho Corredor" />
-              <div className="p-5">
-                <p className="text-xs font-black uppercase tracking-[0.18em] text-civic-blue">Gabinete em movimento</p>
-                <h2 className="mt-2 text-2xl font-black leading-tight">Atendimento próximo e trabalho nos bairros</h2>
-                <p className="mt-3 text-sm leading-6 text-slate-600">Uma apresentação clara do mandato para quem busca informação, agenda e canais oficiais.</p>
-              </div>
-            </div>
-            <div className="mt-4 rounded-lg border border-white/20 bg-white/92 p-4 text-civic-ink shadow-soft backdrop-blur">
-              <div className="grid grid-cols-3 gap-3">
-                <Metric value="3" label="horários por dia" />
-                <Metric value="7" label="temas do jornal" />
-                <Metric value="100%" label="canal organizado" />
-              </div>
             </div>
           </div>
         </div>
@@ -237,14 +220,5 @@ export function HomePage() {
         </div>
       </Section>
     </>
-  );
-}
-
-function Metric({ value, label }: { value: string; label: string }) {
-  return (
-    <div className="rounded-lg bg-slate-100 p-4 text-center">
-      <strong className="block text-2xl font-black text-civic-blue">{value}</strong>
-      <span className="mt-1 block text-xs font-bold uppercase tracking-wide text-slate-500">{label}</span>
-    </div>
   );
 }
