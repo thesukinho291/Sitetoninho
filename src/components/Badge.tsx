@@ -1,3 +1,3 @@
 export function Badge({ children }: { children: React.ReactNode }) {
-  return <span className="inline-flex rounded-full bg-civic-blue/10 px-3 py-1 text-xs font-bold uppercase tracking-wide text-civic-blue">{children}</span>;
+  return <span className="inline-flex rounded-full border border-civic-blue/15 bg-civic-blue/[0.08] px-3 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-[0.16em] text-civic-blue">{children}</span>;
 }

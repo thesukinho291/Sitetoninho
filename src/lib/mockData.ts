@@ -2,13 +2,13 @@ import { Appointment, NewspaperEdition, SiteSettings, SocialAction } from '../ty
 import { SUCCESS_MESSAGE } from './constants';
 
 export const imageBank = {
-  toninhoTribuna: '/images/toninho/toninho-microfone.jpg',
-  heroComunidade: '/images/acoes/hero-comunidade.png',
-  corrida: '/images/acoes/atleta-cidadao.jpg',
-  instituto: '/images/acoes/atleta-cidadao.jpg',
-  acao: '/images/acoes/acao-social.jpg',
-  jornal: '/images/jornal/jornal-capa.jpg',
-  bairro: '/images/acoes/bairro.jpg',
+  toninhoTribuna: '/images/toninho/toninho-microfone.webp',
+  heroComunidade: '/images/acoes/hero-comunidade.webp',
+  corrida: '/images/acoes/atleta-cidadao.webp',
+  instituto: '/images/acoes/atleta-cidadao.webp',
+  acao: '/images/acoes/acao-social.webp',
+  jornal: '/images/jornal/jornal-capa.webp',
+  bairro: '/images/acoes/bairro.webp',
 };
 
 export const defaultSettings: SiteSettings = {

@@ -1,3 +1,4 @@
+/* eslint-disable react-refresh/only-export-components */
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 import {
   createAppointment,
@@ -44,16 +45,16 @@ export function DataProvider({ children }: { children: React.ReactNode }) {
 
   async function refresh() {
     setLoading(true);
-    const [settingsData, appointmentData, newspaperData, actionData] = await Promise.all([
+    const [settingsResult, appointmentResult, newspaperResult, actionResult] = await Promise.allSettled([
       getSettings(),
       getAppointments(),
       getNewspapers(true),
       getSocialActions(true),
     ]);
-    setSettings(settingsData);
-    setAppointments(appointmentData);
-    setNewspapers(newspaperData);
-    setActions(actionData);
+    if (settingsResult.status === 'fulfilled') setSettings(settingsResult.value);
+    if (appointmentResult.status === 'fulfilled') setAppointments(appointmentResult.value);
+    if (newspaperResult.status === 'fulfilled') setNewspapers(newspaperResult.value);
+    if (actionResult.status === 'fulfilled') setActions(actionResult.value);
     setLoading(false);
   }
 

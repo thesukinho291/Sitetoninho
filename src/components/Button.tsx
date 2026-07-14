@@ -15,11 +15,11 @@ export function ButtonLink({ className, variant = 'primary', ...props }: LinkPro
 
 function buttonClass(variant: ButtonProps['variant'], className?: string) {
   return clsx(
-    'inline-flex min-h-11 items-center justify-center gap-2 rounded-lg px-5 py-3 text-center text-sm font-black shadow-sm transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-civic-yellow/40 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0',
-    variant === 'primary' && 'bg-civic-blue text-white hover:bg-blue-700 hover:shadow-soft',
-    variant === 'secondary' && 'bg-civic-yellow text-civic-ink hover:bg-amber-300 hover:shadow-soft',
-    variant === 'ghost' && 'bg-white/10 text-white ring-1 ring-white/35 backdrop-blur hover:bg-white/20',
-    variant === 'dark' && 'bg-civic-ink text-white hover:bg-slate-800',
+    'button-glow group inline-flex min-h-12 items-center justify-center gap-2 rounded-full px-6 py-3 text-center text-sm font-extrabold shadow-sm transition duration-300 hover:-translate-y-0.5 focus:outline-none focus:ring-4 focus:ring-civic-yellow/35 disabled:cursor-not-allowed disabled:opacity-50 disabled:hover:translate-y-0',
+    variant === 'primary' && 'bg-civic-blue text-white hover:bg-civic-sky hover:shadow-blue',
+    variant === 'secondary' && 'bg-civic-yellow text-civic-ink hover:bg-[#ffd95a] hover:shadow-yellow',
+    variant === 'ghost' && 'bg-white/[0.07] text-white ring-1 ring-white/25 backdrop-blur-md hover:bg-white/[0.14] hover:ring-white/45',
+    variant === 'dark' && 'bg-civic-ink text-white hover:bg-civic-navy hover:shadow-dark',
     className,
   );
 }
