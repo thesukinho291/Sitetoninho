@@ -1,5 +1,7 @@
 import { BarChart3, CalendarDays, FileText, LogOut, Newspaper, Settings, Users } from 'lucide-react';
+import { Suspense } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
+import { PageLoader } from '../components/PageLoader';
 import { useAuth } from '../contexts/AuthContext';
 
 const adminLinks = [
@@ -43,7 +45,9 @@ export function AdminLayout() {
         </button>
       </aside>
       <section className="min-w-0 bg-slate-100 text-slate-900">
-        <Outlet />
+        <Suspense fallback={<PageLoader />}>
+          <Outlet />
+        </Suspense>
       </section>
     </div>
   );
